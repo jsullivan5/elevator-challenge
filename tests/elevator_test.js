@@ -44,4 +44,52 @@ describe('Elevator', function() {
     assert.equal(elevator.currentFloor, 0);
     assert.equal(elevator.floorCount, 0);
   });
+
+  it('should allow passengers A and B to go up', () => {
+    let mockUser1 = { name: "Brittany", currentFloor: 2, dropOffFloor: 4 };
+    let mockUser2 = { name: "Rockin' Robbie", currentFloor: 1, dropOffFloor: 7 };
+
+    elevator.goToFloor(mockUser1, mockUser2)
+
+    assert.equal(elevator.currentFloor, 7);
+    assert.equal(elevator.requests, 2);
+    assert.equal(elevator.floorCount, 13);
+    assert.equal(elevator.stopCount, 4);
+  });
+
+  it('should allow passengers A to go up and B to go down', () => {
+    let mockUser1 = { name: "Brittany", currentFloor: 2, dropOffFloor: 4 };
+    let mockUser2 = { name: "Rockin' Robbie", currentFloor: 7, dropOffFloor: 1 };
+
+    elevator.goToFloor(mockUser1, mockUser2)
+
+    assert.equal(elevator.currentFloor, 1);
+    assert.equal(elevator.requests, 2);
+    assert.equal(elevator.floorCount, 13);
+    assert.equal(elevator.stopCount, 4);
+  });
+
+  it('should allow passengers A to go down and B to go up', () => {
+    let mockUser1 = { name: "Brittany", currentFloor: 4, dropOffFloor: 2 };
+    let mockUser2 = { name: "Rockin' Robbie", currentFloor: 1, dropOffFloor: 7 };
+
+    elevator.goToFloor(mockUser1, mockUser2)
+
+    assert.equal(elevator.currentFloor, 7);
+    assert.equal(elevator.requests, 2);
+    assert.equal(elevator.floorCount, 13);
+    assert.equal(elevator.stopCount, 4);
+  });
+
+  it('should allow passengers A and B to go down', () => {
+    let mockUser1 = { name: "Brittany", currentFloor: 4, dropOffFloor: 2 };
+    let mockUser2 = { name: "Rockin' Robbie", currentFloor: 7, dropOffFloor: 1 };
+
+    elevator.goToFloor(mockUser1, mockUser2)
+
+    assert.equal(elevator.currentFloor, 1);
+    assert.equal(elevator.requests, 2);
+    assert.equal(elevator.floorCount, 17);
+    assert.equal(elevator.stopCount, 4);
+  });
 });

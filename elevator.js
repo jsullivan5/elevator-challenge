@@ -5,13 +5,14 @@ export default class Elevator {
     this.passengers = [];
     this.floorCount = 0;
     this.stopCount = 0;
+    this.requests = 0;
   }
 
   goToFloor(...args) {
-    const personArray = [ ...arguments ];
+    this.passengers = [ ...arguments ]
 
-    personArray.forEach(person => {
-      this.queue.push(person);
+    this.passengers.forEach(person => {
+      this.requests++;
 
       while (this.currentFloor !== person.currentFloor) {
         this.currentFloor > person.currentFloor ? (this.currentFloor--, this.floorCount++) : (this.currentFloor++, this.floorCount++);
@@ -35,5 +36,6 @@ export default class Elevator {
     this.passengers = [];
     this.floorCount = 0;
     this.stopCount = 0;
+    this.requests = 0;
   }
 }
