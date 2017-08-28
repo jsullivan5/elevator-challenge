@@ -8,6 +8,8 @@ export default class Elevator {
   }
 
   goToFloor(...args) {
+    const time = new Date().getHours()
+
     this.passengers = [ ...arguments ];
 
     for (var i = 0; i < this.passengers.length; i) {
@@ -26,6 +28,13 @@ export default class Elevator {
 
       this.stopCount++;
       this.passengers.shift()
+    }
+
+    if (time < 12 && this.passengers.length === 0) {
+      while (this.currentFloor !== 0) {
+        this.currentFloor--;
+        this.floorCount++;
+      }
     }
   }
 

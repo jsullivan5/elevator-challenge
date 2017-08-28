@@ -7,6 +7,7 @@ const Elevator = require('../elevator').default;
 
 describe('Elevator', function() {
   let elevator = new Elevator();
+  const time = new Date().getHours()
 
   beforeEach(function() {
     elevator.reset();
@@ -18,8 +19,17 @@ describe('Elevator', function() {
     elevator.goToFloor(mockUser);
 
     assert.equal(elevator.stopCount, 2);
-    assert.equal(elevator.currentFloor, 5);
-    assert.equal(elevator.floorCount, 5);
+
+    if (time >= 12) {
+      assert.equal(elevator.currentFloor, 5);
+      assert.equal(elevator.floorCount, 5);
+    } else {
+      assert.equal(elevator.floorCount, 10);
+      assert.equal(elevator.currentFloor, 0);
+    }
+
+    assert.equal(elevator.stopCount, 2);
+    assert.equal(elevator.passengers.length, 0);
   });
 
   it('should bring a rider to a floor below their current floor', () => {
@@ -27,9 +37,17 @@ describe('Elevator', function() {
 
     elevator.goToFloor(mockUser);
 
-    assert.equal(elevator.currentFloor, 3);
+    if (time >= 12) {
+      assert.equal(elevator.currentFloor, 3);
+      assert.equal(elevator.floorCount, 13);
+    } else {
+      assert.equal(elevator.currentFloor, 0);
+      assert.equal(elevator.floorCount, 16);
+    }
+
     assert.equal(elevator.stopCount, 2);
-    assert.equal(elevator.floorCount, 13);
+    assert.equal(elevator.passengers.length, 0);
+
   });
 
   it('should reset the elevator when reset is called', () => {
@@ -37,7 +55,13 @@ describe('Elevator', function() {
 
     elevator.goToFloor(mockUser);
 
-    assert.equal(elevator.currentFloor, 3);
+    if (time >= 12) {
+      assert.equal(elevator.currentFloor, 3);
+      assert.equal(elevator.floorCount, 16);
+    } else {
+      assert.equal(elevator.currentFloor, 0);
+      assert.equal(elevator.floorCount, 19);
+    }
 
     elevator.reset()
 
@@ -51,9 +75,15 @@ describe('Elevator', function() {
 
     elevator.goToFloor(mockUser1, mockUser2)
 
-    assert.equal(elevator.currentFloor, 7);
+    if (time >= 12) {
+      assert.equal(elevator.currentFloor, 7);
+      assert.equal(elevator.floorCount, 13);
+    } else {
+      assert.equal(elevator.currentFloor, 0);
+      assert.equal(elevator.floorCount, 20);
+    }
+
     assert.equal(elevator.requests, 2);
-    assert.equal(elevator.floorCount, 13);
     assert.equal(elevator.stopCount, 4);
     assert.equal(elevator.passengers.length, 0);
   });
@@ -64,9 +94,15 @@ describe('Elevator', function() {
 
     elevator.goToFloor(mockUser1, mockUser2)
 
-    assert.equal(elevator.currentFloor, 1);
+    if (time >= 12) {
+      assert.equal(elevator.currentFloor, 1);
+      assert.equal(elevator.floorCount, 13);
+    } else {
+      assert.equal(elevator.currentFloor, 0);
+      assert.equal(elevator.floorCount, 14);
+    }
+
     assert.equal(elevator.requests, 2);
-    assert.equal(elevator.floorCount, 13);
     assert.equal(elevator.stopCount, 4);
     assert.equal(elevator.passengers.length, 0);
   });
@@ -77,9 +113,15 @@ describe('Elevator', function() {
 
     elevator.goToFloor(mockUser1, mockUser2)
 
-    assert.equal(elevator.currentFloor, 7);
+    if (time >= 12) {
+      assert.equal(elevator.currentFloor, 7);
+      assert.equal(elevator.floorCount, 13);
+    } else {
+      assert.equal(elevator.currentFloor, 0);
+      assert.equal(elevator.floorCount, 20);
+    }
+
     assert.equal(elevator.requests, 2);
-    assert.equal(elevator.floorCount, 13);
     assert.equal(elevator.stopCount, 4);
     assert.equal(elevator.passengers.length, 0);
   });
@@ -90,9 +132,15 @@ describe('Elevator', function() {
 
     elevator.goToFloor(mockUser1, mockUser2)
 
-    assert.equal(elevator.currentFloor, 1);
+    if (time >= 12) {
+      assert.equal(elevator.currentFloor, 1);
+      assert.equal(elevator.floorCount, 17);
+    } else {
+      assert.equal(elevator.currentFloor, 0);
+      assert.equal(elevator.floorCount, 18);
+    }
+
     assert.equal(elevator.requests, 2);
-    assert.equal(elevator.floorCount, 17);
     assert.equal(elevator.stopCount, 4);
     assert.equal(elevator.passengers.length, 0);
   });
