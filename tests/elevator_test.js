@@ -25,4 +25,16 @@ describe('Elevator', function() {
 
     assert.equal(elevator.currentFloor, 3);
   });
+
+  it('should reset the elevator when reset is called', () => {
+    let mockUser = { name: "Brittany", currentFloor: 8, dropOffFloor: 3 };
+    elevator.goToFloor(mockUser);
+
+    assert.equal(elevator.currentFloor, 3);
+
+    elevator.reset()
+
+    assert.equal(elevator.currentFloor, 0);
+    assert.equal(elevator.floorCount, 0);
+  });
 });
