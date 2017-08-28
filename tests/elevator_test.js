@@ -68,7 +68,10 @@ describe('Elevator', function() {
     elevator.reset()
 
     assert.equal(elevator.currentFloor, 0);
+    assert.equal(elevator.passengers.length, 0);
     assert.equal(elevator.floorCount, 0);
+    assert.equal(elevator.stopCount, 0);
+    assert.equal(elevator.requests, 0);
   });
 
   it('should allow passengers A and B to go up', () => {
