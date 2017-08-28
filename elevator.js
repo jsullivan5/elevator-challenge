@@ -4,17 +4,29 @@ export default class Elevator {
     this.queue = [];
     this.passengers = [];
     this.floorCount = 0;
+    this.stopCount = 0;
   }
 
-  goToFloor(person) {
-    while (this.currentFloor !== person.currentFloor) {
-      this.currentFloor > person.currentFloor ? (this.currentFloor--, this.floorCount++) : (this.currentFloor++, this.floorCount++);
-    }
+  goToFloor(...args) {
+    const personArray = [ ...arguments ];
 
-    while (this.currentFloor !== person.dropOffFloor) {
-      this.currentFloor > person.dropOffFloor ? (this.currentFloor--, this.floorCount++) :
-      (this.currentFloor++, this.floorCount++)
-    }
+    personArray.forEach(person => {
+      this.queue.push(person);
+
+      while (this.currentFloor !== person.currentFloor) {
+        this.currentFloor > person.currentFloor ? (this.currentFloor--, this.floorCount++) : (this.currentFloor++, this.floorCount++);
+      }
+
+      this.stopCount++;
+
+      while (this.currentFloor !== person.dropOffFloor) {
+        this.currentFloor > person.dropOffFloor ? (this.currentFloor--, this.floorCount++) :
+        (this.currentFloor++, this.floorCount++);
+      }
+
+      this.stopCount++;
+      this.queue.shift();
+    });
   }
 
   reset() {
@@ -22,5 +34,6 @@ export default class Elevator {
     this.queue = [];
     this.passengers = [];
     this.floorCount = 0;
+    this.stopCount = 0;
   }
 }
