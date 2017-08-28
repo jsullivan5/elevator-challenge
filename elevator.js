@@ -35,6 +35,7 @@ export default class Elevator {
         this.currentFloor--;
         this.floorCount++;
       }
+      this.stopCount++;
     }
   }
 

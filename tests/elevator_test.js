@@ -18,17 +18,16 @@ describe('Elevator', function() {
 
     elevator.goToFloor(mockUser);
 
-    assert.equal(elevator.stopCount, 2);
-
     if (time >= 12) {
       assert.equal(elevator.currentFloor, 5);
       assert.equal(elevator.floorCount, 5);
+      assert.equal(elevator.stopCount, 2);
     } else {
       assert.equal(elevator.floorCount, 10);
       assert.equal(elevator.currentFloor, 0);
+      assert.equal(elevator.stopCount, 3);
     }
 
-    assert.equal(elevator.stopCount, 2);
     assert.equal(elevator.passengers.length, 0);
   });
 
@@ -40,12 +39,13 @@ describe('Elevator', function() {
     if (time >= 12) {
       assert.equal(elevator.currentFloor, 3);
       assert.equal(elevator.floorCount, 13);
+      ssert.equal(elevator.stopCount, 2);
     } else {
       assert.equal(elevator.currentFloor, 0);
       assert.equal(elevator.floorCount, 16);
+      assert.equal(elevator.stopCount, 3);
     }
 
-    assert.equal(elevator.stopCount, 2);
     assert.equal(elevator.passengers.length, 0);
 
   });
@@ -57,10 +57,12 @@ describe('Elevator', function() {
 
     if (time >= 12) {
       assert.equal(elevator.currentFloor, 3);
-      assert.equal(elevator.floorCount, 16);
+      assert.equal(elevator.floorCount, 13);
+      assert.equal(elevator.stopCount, 2);
     } else {
       assert.equal(elevator.currentFloor, 0);
-      assert.equal(elevator.floorCount, 19);
+      assert.equal(elevator.floorCount, 16);
+      assert.equal(elevator.stopCount, 3);
     }
 
     elevator.reset()
@@ -78,13 +80,14 @@ describe('Elevator', function() {
     if (time >= 12) {
       assert.equal(elevator.currentFloor, 7);
       assert.equal(elevator.floorCount, 13);
+      assert.equal(elevator.stopCount, 4);
     } else {
       assert.equal(elevator.currentFloor, 0);
       assert.equal(elevator.floorCount, 20);
+      assert.equal(elevator.stopCount, 5);
     }
 
     assert.equal(elevator.requests, 2);
-    assert.equal(elevator.stopCount, 4);
     assert.equal(elevator.passengers.length, 0);
   });
 
@@ -97,13 +100,14 @@ describe('Elevator', function() {
     if (time >= 12) {
       assert.equal(elevator.currentFloor, 1);
       assert.equal(elevator.floorCount, 13);
+      assert.equal(elevator.stopCount, 4);
     } else {
       assert.equal(elevator.currentFloor, 0);
       assert.equal(elevator.floorCount, 14);
+      assert.equal(elevator.stopCount, 5);
     }
 
     assert.equal(elevator.requests, 2);
-    assert.equal(elevator.stopCount, 4);
     assert.equal(elevator.passengers.length, 0);
   });
 
@@ -116,13 +120,14 @@ describe('Elevator', function() {
     if (time >= 12) {
       assert.equal(elevator.currentFloor, 7);
       assert.equal(elevator.floorCount, 13);
+      assert.equal(elevator.stopCount, 4);
     } else {
       assert.equal(elevator.currentFloor, 0);
       assert.equal(elevator.floorCount, 20);
+      assert.equal(elevator.stopCount, 5);
     }
 
     assert.equal(elevator.requests, 2);
-    assert.equal(elevator.stopCount, 4);
     assert.equal(elevator.passengers.length, 0);
   });
 
@@ -135,13 +140,14 @@ describe('Elevator', function() {
     if (time >= 12) {
       assert.equal(elevator.currentFloor, 1);
       assert.equal(elevator.floorCount, 17);
+      assert.equal(elevator.stopCount, 4);
     } else {
       assert.equal(elevator.currentFloor, 0);
       assert.equal(elevator.floorCount, 18);
+      assert.equal(elevator.stopCount, 5);
     }
 
     assert.equal(elevator.requests, 2);
-    assert.equal(elevator.stopCount, 4);
     assert.equal(elevator.passengers.length, 0);
   });
 });
