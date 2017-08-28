@@ -1,7 +1,6 @@
 export default class Elevator {
   constructor() {
     this.currentFloor = 0;
-    this.queue = [];
     this.passengers = [];
     this.floorCount = 0;
     this.stopCount = 0;
@@ -9,30 +8,29 @@ export default class Elevator {
   }
 
   goToFloor(...args) {
-    this.passengers = [ ...arguments ]
+    this.passengers = [ ...arguments ];
 
-    this.passengers.forEach(person => {
+    for (var i = 0; i < this.passengers.length; i) {
       this.requests++;
 
-      while (this.currentFloor !== person.currentFloor) {
-        this.currentFloor > person.currentFloor ? (this.currentFloor--, this.floorCount++) : (this.currentFloor++, this.floorCount++);
+      while (this.currentFloor !== this.passengers[i].currentFloor) {
+        this.currentFloor > this.passengers[i].currentFloor ? (this.currentFloor--, this.floorCount++) : (this.currentFloor++, this.floorCount++);
       }
 
       this.stopCount++;
 
-      while (this.currentFloor !== person.dropOffFloor) {
-        this.currentFloor > person.dropOffFloor ? (this.currentFloor--, this.floorCount++) :
+      while (this.currentFloor !== this.passengers[i].dropOffFloor) {
+        this.currentFloor > this.passengers[i].dropOffFloor ? (this.currentFloor--, this.floorCount++) :
         (this.currentFloor++, this.floorCount++);
       }
 
       this.stopCount++;
-      this.queue.shift();
-    });
+      this.passengers.shift()
+    }
   }
 
   reset() {
     this.currentFloor = 0;
-    this.queue = [];
     this.passengers = [];
     this.floorCount = 0;
     this.stopCount = 0;

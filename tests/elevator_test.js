@@ -55,6 +55,7 @@ describe('Elevator', function() {
     assert.equal(elevator.requests, 2);
     assert.equal(elevator.floorCount, 13);
     assert.equal(elevator.stopCount, 4);
+    assert.equal(elevator.passengers.length, 0);
   });
 
   it('should allow passengers A to go up and B to go down', () => {
@@ -67,6 +68,7 @@ describe('Elevator', function() {
     assert.equal(elevator.requests, 2);
     assert.equal(elevator.floorCount, 13);
     assert.equal(elevator.stopCount, 4);
+    assert.equal(elevator.passengers.length, 0);
   });
 
   it('should allow passengers A to go down and B to go up', () => {
@@ -79,6 +81,7 @@ describe('Elevator', function() {
     assert.equal(elevator.requests, 2);
     assert.equal(elevator.floorCount, 13);
     assert.equal(elevator.stopCount, 4);
+    assert.equal(elevator.passengers.length, 0);
   });
 
   it('should allow passengers A and B to go down', () => {
@@ -91,5 +94,6 @@ describe('Elevator', function() {
     assert.equal(elevator.requests, 2);
     assert.equal(elevator.floorCount, 17);
     assert.equal(elevator.stopCount, 4);
+    assert.equal(elevator.passengers.length, 0);
   });
 });
